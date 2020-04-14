@@ -423,7 +423,7 @@ pre {
 }
 body {
   color: #4a4a4a;
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: 400;
   line-height: 1.5;
 }
@@ -2901,7 +2901,7 @@ a.navbar-item:hover,
 a.navbar-item.is-active,
 .navbar-link.is-active {
   background-color: #fafafa;
-  color: #dc5232;
+  color: #3273dc;
 }
 .navbar-item {
   display: block;
@@ -10842,6 +10842,7 @@ article.article .content blockquote footer strong + cite {
   align-items: center;
   padding: 1.25rem 0.75rem;
   margin: 0 0;
+  font-size: 1.25rem;
 }
 .navbar-main .navbar-item.is-active {
   background-color: transparent;

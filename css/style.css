@@ -10841,6 +10841,7 @@ article.article .content blockquote footer strong + cite {
   align-items: center;
   padding: 1.25rem 0.75rem;
   margin: 0 0;
+  font-size: 1.25rem;
 }
 .navbar-main .navbar-item.is-active {
   background-color: transparent;
