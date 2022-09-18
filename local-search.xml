@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>基因ID转换的方法</title>
+    <link href="/2020/06/04/%E5%9F%BA%E5%9B%A0ID%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <url>/2020/06/04/%E5%9F%BA%E5%9B%A0ID%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<p>不知道有多少人像我一样很奇怪为何基因的ID没有统一的命名，而且gene symbol也经常五花八门，导致我们经常要将拿到的gene list转换到需要的ID版本。</p><p>这样做的方法有很多，思路主要有两种，一种是下载相应的记录各种ID的匹配文件然后自己写脚本进行匹配，另一种是不下载文件，但是是实时访问数据库（API）进行查询。前者速度上有优势，但是下载的文件需要妥善存放，否则不知什么时候就找不到了；后者方便，随用随取，但是当查询量太大的话可能会出现网络方面的问题。</p><p>基本上每个这类数据库（NCBI, Ensembl…）都有这类文件的下载入口或者快捷访问的API，我试过很多，这里记录一下我觉得最方便的两个方式。</p><h2 id="1-从HGNC下载对应ID匹配文件"><a href="#1-从HGNC下载对应ID匹配文件" class="headerlink" title="1. 从HGNC下载对应ID匹配文件"></a>1. 从HGNC下载对应ID匹配文件</h2><p>从HGNC的Customs Dowloads可以自定义选择你所需要的内容，一般常用的是NCBI Gene ID和Ensembl gene ID。下载完成之后保存到固定的地方，每次要转换ID时再读取即可。</p><p>地址：<a href="https://www.genenames.org/download/custom/" title="https://www.genenames.org/download/custom/">https://www.genenames.org/download/custom/</a></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfhe343twbj30tb0nk0wt.jpg"></p><h2 id="2-使用MyGene-API"><a href="#2-使用MyGene-API" class="headerlink" title="2. 使用MyGene API"></a>2. 使用MyGene API</h2><p><a href="https://mygene.info/" title="MyGene">MyGene</a>是<a href="https://biothings.io/%E4%B8%89%E5%8F%89%E6%88%9F%E4%B8%AD%E7%9A%84%E4%B8%80%E4%B8%AA%EF%BC%8C%E4%B8%89%E5%8F%89%E6%88%9F%E9%83%BD%E6%98%AF%E5%BE%88%E5%BC%BA%E5%A4%A7%E7%9A%84API%E3%80%82" title="https://biothings.io/三叉戟中的一个，三叉戟都是很强大的API。">https://biothings.io/三叉戟中的一个，三叉戟都是很强大的API。</a></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfhe8b06a9j311v0ijh1f.jpg"></p><p>网站中有很详细的API示例：&amp;#x20;</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfhe9ak9vwj31hp0pfdl0.jpg"></p><p>如果不会用API也没有关系，MyGene有对应的<a href="https://pypi.org/project/mygene/" title="python包">python包</a>和<a href="https://www.bioconductor.org/packages/release/bioc/html/mygene.html" title="r包">r包</a>，效果和API没有差别。</p><h2 id="3-Biomart"><a href="#3-Biomart" class="headerlink" title="3. Biomart"></a>3. Biomart</h2><p>最后再说一下介于前面两者之间的biomart，就和它的名字一样，它就是一个超市，你可以在线地选取你需要的数据集，就像是用API下载HGNC里的数据。biomart十分强大，但是在转换ID这件事情上我并不怎么用它，原因就是它太复杂，杀鸡焉用牛刀，而且最近好像连接不上。</p><hr><p>我最常用的是第一种。以ensembl ID转gene ID为例，我把从HGNC下载到的文件提取出ensembl ID到gene ID的字典，然后存成<code>pickle</code>，每次需要的时候就可以直接load，转换时用<code>map</code>，省时又省力。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>小技巧</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ID转换</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>如何优雅地清除复制文本所带的格式</title>
+    <link href="/2020/06/04/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E6%B8%85%E9%99%A4%E5%A4%8D%E5%88%B6%E6%96%87%E6%9C%AC%E6%89%80%E5%B8%A6%E7%9A%84%E6%A0%BC%E5%BC%8F/"/>
+    <url>/2020/06/04/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E6%B8%85%E9%99%A4%E5%A4%8D%E5%88%B6%E6%96%87%E6%9C%AC%E6%89%80%E5%B8%A6%E7%9A%84%E6%A0%BC%E5%BC%8F/</url>
+    
+    <content type="html"><![CDATA[<p>就跟人类的本质一样，每个坐在电脑前的人使用最多快捷操作多半就是复制加粘贴。然而很多时候，这套快捷键并不能直接达到目的，因为粘贴的同时也粘贴内容原来的格式。其实这个问题也不大，无非就是用格式刷统一一下格式就行了，或者是先粘贴到浏览器搜索之类的地方先把附带的格式洗掉。这样一来，快捷键之后还要再花几秒时间，你是否还愿意称之为快捷操作呢。</p><p>我显然是不愿意多花这几秒钟的，毕竟人生苦短。</p><p>那么要怎么做才能优雅地粘贴呢？</p><p>答案很简单，在<a href="https://u.tools/" title="uTools">uTools</a>的自动化助手中简单设置一个快捷操作即可。</p><h2 id="uTools"><a href="#uTools" class="headerlink" title="uTools"></a>uTools</h2><p>uTools是一个很强大快捷操作工具箱，而且是免费的。</p><p>赞美的话就不多说了，就放一张我安装的插件，今天的主题是如何优雅的清除剪切板的格式。</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfgjsxhoccj30e40bsgo0.jpg"></p><h2 id="第一步-安装uTools"><a href="#第一步-安装uTools" class="headerlink" title="第一步 安装uTools"></a>第一步 安装uTools</h2><p><a href="https://u.tools/" title="官网">官网</a>下载，安装很简单。</p><h2 id="第二步-安装自动化助手插件"><a href="#第二步-安装自动化助手插件" class="headerlink" title="第二步 安装自动化助手插件"></a>第二步 安装自动化助手插件</h2><p>呼出uTools之后输入插件中心，自动化助手就在首页，点击即可安装。</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfgk0jix1uj30n80hotcc.jpg"></p><h3 id="第三步-新建自动化"><a href="#第三步-新建自动化" class="headerlink" title="第三步 新建自动化"></a>第三步 新建自动化</h3><p>新建一个自动化操作，读取剪切板里的内容并输出出来。</p><p>代码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">const &#123; clipboard &#125; = require(<span class="hljs-string">&#x27;electron&#x27;</span>)  <br>  <br>const text = clipboard.readText()  <br>console.log(text)  <br>  <br>clipboard.writeText(text)<br></code></pre></td></tr></table></figure><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfgk4g23mtj30n80i4gmj.jpg"></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfgka72uitj30n80i4dhi.jpg"></p><h2 id="https-jianhua-wang-github-io-2020-06-04-E5-A6-82-E4-BD-95-E4-BC-98-E9-9B-85-E5-9C-B0-E6-B8-85-E9-99-A4-E5-A4-8D-E5-88-B6-E6-96-87-E6-9C-AC-E6-89-80-E5-B8-A6-E7-9A-84-E6-A0-BC-E5-BC-8F-E7-AC-AC-E5-9B-9B-E6-AD-A5-E5-88-86-E9-85-8D-E5-BF-AB-E6-8D-B7-E9-94-AE-“第四步-分配快捷键”-第四步-分配快捷键"><a href="#https-jianhua-wang-github-io-2020-06-04-E5-A6-82-E4-BD-95-E4-BC-98-E9-9B-85-E5-9C-B0-E6-B8-85-E9-99-A4-E5-A4-8D-E5-88-B6-E6-96-87-E6-9C-AC-E6-89-80-E5-B8-A6-E7-9A-84-E6-A0-BC-E5-BC-8F-E7-AC-AC-E5-9B-9B-E6-AD-A5-E5-88-86-E9-85-8D-E5-BF-AB-E6-8D-B7-E9-94-AE-“第四步-分配快捷键”-第四步-分配快捷键" class="headerlink" title="[](https://jianhua-wang.github.io/2020/06/04/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E6%B8%85%E9%99%A4%E5%A4%8D%E5%88%B6%E6%96%87%E6%9C%AC%E6%89%80%E5%B8%A6%E7%9A%84%E6%A0%BC%E5%BC%8F/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E5%88%86%E9%85%8D%E5%BF%AB%E6%8D%B7%E9%94%AE “第四步 分配快捷键”)第四步 分配快捷键"></a>[](<a href="https://jianhua-wang.github.io/2020/06/04/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E6%B8%85%E9%99%A4%E5%A4%8D%E5%88%B6%E6%96%87%E6%9C%AC%E6%89%80%E5%B8%A6%E7%9A%84%E6%A0%BC%E5%BC%8F/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E5%88%86%E9%85%8D%E5%BF%AB%E6%8D%B7%E9%94%AE">https://jianhua-wang.github.io/2020/06/04/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E6%B8%85%E9%99%A4%E5%A4%8D%E5%88%B6%E6%96%87%E6%9C%AC%E6%89%80%E5%B8%A6%E7%9A%84%E6%A0%BC%E5%BC%8F/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E5%88%86%E9%85%8D%E5%BF%AB%E6%8D%B7%E9%94%AE</a> “第四步 分配快捷键”)第四步 分配快捷键</h2><p>完成前三步其实就可以通过uTools输入清除格式来实现操作了，但是这样还不够优雅。我们可以直接给这个操作分配一个全局快捷键，设置步骤也很简单，我设置的是双击cmd，以后我只需在按下cmd V之前多按两下cmd就可以了。（uTools是支持Windows，macOS和Linux，我用的Mac所以用的是cmd）</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfgkm94ac7j30n80ho0tw.jpg"></p><h2 id="其他的尝试"><a href="#其他的尝试" class="headerlink" title="其他的尝试"></a>其他的尝试</h2><p>在发现这个功能之前我还尝试过一些其他的方法。</p><h3 id="VS-code"><a href="#VS-code" class="headerlink" title="VS code"></a>VS code</h3><p>类似前面提到的浏览器搜索栏，因为基本上全天都打开着，所以年少无知的时候一直这么用。</p><h3 id="Mac自动操作"><a href="#Mac自动操作" class="headerlink" title="Mac自动操作"></a>Mac自动操作</h3><p>和uTools的自动化操作很像，但是没有分配快捷键的权限。</p><h3 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h3><p>Alfred的名气就不用说了，设置也非常简单，都不用自己试代码。但是Alfred只支持Mac，而且需要付费！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>小技巧</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>效率</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Python读Fastq新姿势</title>
+    <link href="/2020/05/27/Python%E8%AF%BBFastq%E6%96%B0%E5%A7%BF%E5%8A%BF/"/>
+    <url>/2020/05/27/Python%E8%AF%BBFastq%E6%96%B0%E5%A7%BF%E5%8A%BF/</url>
+    
+    <content type="html"><![CDATA[<p>分析二代测序数据时免不了要对fastq文件进行操作，然而也会出现想进行的操作并没有现成的工具可以实现的情况，这时候就需要自己写一个小脚本来读取fastq文件并进行操作。</p><p>其实用Python读取fastq文件的逻辑也很简单，根据fastq每四行为一个read的特点，边读边记行数，行数除4余2的行即位序列所在的行。这种方法看起来很naive，不过好像也没有更优雅的方式，直到我发现了mappy。</p><h1 id="mappy简介"><a href="#mappy简介" class="headerlink" title="mappy简介"></a>mappy简介</h1><p><a href="https://pypi.org/project/mappy/" title="mappy">mappy</a>是minimap2的Python版本，同样也是出自Li Heng，你可以使用它在Python程序直接实现和minimap2同样性能的比对工具，而不在需要从命令行调用。不要问为什么这么强，问就是Cython。</p><p>而这里我们需要用到的只是mappy的一个小小的功能：</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf749qy6ouj30vf06vaaz.jpg"></p><p>可以看到mappy读取fastq只需要一行：<code>mp.fastx_read(&#39;./test.fq&#39;,read_comment=True)</code>，然后返回一个迭代器，内容是一个元组，read ID，序列包括质量等信息都在里面。</p><h1 id="mappy性能对比"><a href="#mappy性能对比" class="headerlink" title="mappy性能对比"></a>mappy性能对比</h1><p>这里通过一个小任务来比较mappy和我以前使用的方法的区别（其实也是Cython和Python的区别）</p><p>任务是将一个有1千万条read的fastq文件截取前50bp写进新fastq，read ID不变。</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf74d2gk2pj30u309hwfx.jpg"></p><p>相比之下，不仅代码少了很多，而且时间缩短了约25%。</p><p>换成gzip压缩文件后：</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf74mokiosj30va0acmys.jpg"></p><p>mappy的速度优势更明显了。</p><p>今天也是羡慕C的速度的一天呢😐。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>NGS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>Fastq</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Affy Transcript Cluster ID转换</title>
+    <link href="/2020/04/20/Affy%20Transcript%20Cluster%20ID%E8%BD%AC%E6%8D%A2/"/>
+    <url>/2020/04/20/Affy%20Transcript%20Cluster%20ID%E8%BD%AC%E6%8D%A2/</url>
+    
+    <content type="html"><![CDATA[<p>我在查看GSE103380的GEO2R结果的时候发现这个数据没有gene symbol，反而是一堆我看不懂的TC开头的ID，误打误撞发现居然有个在线工具可以转，而这些TC开头的ID是Affymatrix 的 Transcript Cluster ID。</p><p>这个工具叫<a href="https://biodbnet-abcc.ncifcrf.gov/db/db2db.php" title="bioDBnet">bioDBnet</a>，转换速度还可以。</p><p><img src="http://yanxuan.nosdn.127.net/989dee018f689f458050b9b97336cedb.png"></p><p><img src="http://yanxuan.nosdn.127.net/ca236a209cac42f2f777ef99b701c1a9.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>小技巧</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ID转换</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Windows科学上网方法</title>
+    <link href="/2020/02/11/Windows%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%96%B9%E6%B3%95/"/>
+    <url>/2020/02/11/Windows%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<p>科学上网（俗称翻墙）的方式有很多种，包括自己搭梯子、购买搭好的梯子和使用免费的梯子。</p><p>对于大多数人来说，选择一种经济实惠又不折腾的方法是很关键的，下面我就我科学上网的一些经验来谈谈如何选择合适的方式。</p><h2 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h2><p>掌握多种科学上网方式以保证随时的上网需求；免费的方式省钱但费点力，付费的方式花钱但省心还可以在IOS设备上使用；免费方式推荐浏览器插件：SetupVPN，付费方式推荐购买Shadowsocks账号。</p><h2 id="免费方式"><a href="#免费方式" class="headerlink" title="免费方式"></a>免费方式</h2><p>👴不是没有钱，👴就喜欢这种薅羊毛的感觉</p><h2 id="爬虫抓取免费账号"><a href="#爬虫抓取免费账号" class="headerlink" title="爬虫抓取免费账号"></a>爬虫抓取免费账号</h2><p>常见的免费方式就是使用爬虫抓取免费socks账号，有能力的可以自己抓或者使用别人的程序，别人Po在网上的往往是无效的，自己抓的也很难坚持很长时间。所以我不推荐这种方式。</p><p>如果非要用socks账号进行科学上网的话，点<a href="https://github.com/Alvin9999/new-pac/wiki/ss%E5%85%8D%E8%B4%B9%E8%B4%A6%E5%8F%B7" title="这里">这里</a>可以找到靠谱的免费SSR账号，基本上每天都会更新，因为经常会被封锁。</p><h2 id="使用免费软件"><a href="#使用免费软件" class="headerlink" title="使用免费软件"></a>使用免费软件</h2><h3 id="免费软件"><a href="#免费软件" class="headerlink" title="免费软件"></a>免费软件</h3><p>这样的软件有几个比如：<a href="https://getlantern.org/zh_CN/" title="lantern">lantern</a> 和<a href="https://freegate.en.softonic.com/" title="freegate">freegate</a></p><p>Lantern 要比Freegate好用一点，但是有一点比较头疼的是，GFW会在某些特殊时期加强，这时候这两个软件都没有办法发挥作用。</p><h3 id="免费浏览器插件"><a href="#免费浏览器插件" class="headerlink" title="免费浏览器插件"></a>免费浏览器插件</h3><p>我在Windows上主要使用Chrome，所以在这里推荐几款Chrome上的科学上网插件。 &amp;#x20;<br>更新：微软的chromium内核的新Edge浏览器已经发布正式版了，下面提到的插件都直接可以在应用商店下载，而且不需要翻墙。</p><h4 id="SetupVPN"><a href="#SetupVPN" class="headerlink" title="SetupVPN"></a>SetupVPN</h4><p><img src="https://i.loli.net/2020/02/21/mbqeXkd5vHIGWzY.png"></p><p>是一款浏览器插件，无法配置自动代理，网速一般，但是免费。能翻墙就直接在浏览器应用商店搜索安装，</p><p>无法翻墙有两种方法：</p><ol><li><p>下载插件文件安装</p></li><li><p>1.  下载Chrome插件crx文件，<a href="http://www.chajianmi.com/download/oofgbpoabipfcfjapgnbbjjaenockbdp" title="http://www.chajianmi.com/download/oofgbpoabipfcfjapgnbbjjaenockbdp">http://www.chajianmi.com/download/oofgbpoabipfcfjapgnbbjjaenockbdp</a></p><ol><li><p>将下载文件的后缀名改成zip或者rar，然后解压</p></li><li><p>进入Chrome扩展程序管理页面，打开右上角开发者模式</p></li><li><p>将解压的文件夹拖该页面安装即可</p></li></ol></li><li><p>尝试蓝灯翻墙</p></li></ol><p>蓝灯有的时候可以短暂的翻墙，有的时候完全不行。运气好的话连接成功就可以在Chrome上登入你的Google账户，这样你之前安装过的插件都会被同步过来，如果你没有安装过setupVPN也可以通过商店安装。</p><h4 id="谷歌上网助手"><a href="#谷歌上网助手" class="headerlink" title="谷歌上网助手"></a>谷歌上网助手</h4><p><img src="https://i.loli.net/2020/02/21/ym8VWu2UFfpidZo.png"></p><p>不像SetupVPN，这款插件只能访问部分google的服务，可以使用google搜索引擎，Gmail和google scholar，但是不能上YouTube，Twitter等非google网站更是不用说了。不过好在这个插件速度明显要比SetupVPN要快，所以非常适合国内的科研人员。还有一点不容忽视，即SetupVPN无法自动代理，因此在访问很多国内的网站的时候很慢甚至无法加载，而谷歌上网助手就没有这个问题。</p><p>我一般是同时安装这两个插件根据不同的上网需求切换着用，最近好像SSR被封的特别厉害，反倒这些免费的方式成了最靠谱的方法了。</p><p>安装方法参照setupVPN的安装方法，能下载到crx就解压后拖到Chrome里，下载不到就想办法先翻墙，在Chrome应用商店里面下载。</p><h2 id="付费方式"><a href="#付费方式" class="headerlink" title="付费方式"></a>付费方式</h2><p>这时是不是有人就要问：既然免费的方法这么香，还要花钱折腾付费的干嘛？不是花钱找罪受吗？</p><p>花钱找罪受是不假。然而我们前面提到的免费的Chrome插件虽然方便省钱，但是很多时候却是满足不了我们的需求。比如我们需要全局代理而不只是在Chrome上翻墙，最常见的例子就是邮件客户端登陆Gmail，又或者MacOS用户只习惯用Safari，不喜欢流氓软件Chrome。更重要的是付费购买的梯子不只是可以在PC上科学上网，移动设备同样也可以。</p><p>现在付费的方式主要分两种，一种是自己搭建服务器，一种是购买别人搭建好的服务器上的账号。当然我们前面说的免费的软件和插件都有付费升级的选项，不推荐的原因有两个，一是贵，二是有前面说的局限性。</p><h2 id="自建服务器"><a href="#自建服务器" class="headerlink" title="自建服务器"></a>自建服务器</h2><p>也就是常说的VPS(Virtual Private Server)。原理就是租一台在海外的服务器，然后在上面搭建代理服务。我没有试过，原因是被价格全退了，基本上要20刀+&#x2F;年，现在好像还在涨。因为没有试过，所以我不知道这种方式的速度如何以及会不会被封锁，封锁了之后怎么办。不过感觉我也不会尝试。</p><h2 id="购买账号"><a href="#购买账号" class="headerlink" title="购买账号"></a>购买账号</h2><p>这个是我推荐的也是我正在使用的。</p><p><img src="https://i.loli.net/2020/02/21/3iIuUHeSOJX9p57.png"></p><p><a href="https://portal.shadowsocks.nl/" title="shadowsocks">shadowsocks</a>，俗称小飞机。我用了快一年半了，下面是我总结的小飞机的优点和缺点。</p><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ul><li><p>便宜。我买的是入门版，96RMB&#x2F;年，双十一的时候还有活动三年只需两年的价格。每个月60G流量根本用不完，而且我怀疑他的流量计算有问题，我基本上每天都看YouTube，但是每个月的流量都不超过1G。</p></li><li><p>方便。Mac，Windows，iPhone，iPad都可以用。自动代理和全局代理随意切换。</p></li><li><p>省事。虽然现在动不动就被封禁，但是人家毕竟是靠这个赚钱的，所以每次被封禁都会第一时间想办法解决，还会有一定的补偿。之前是只支持SSR，去年下半年遭到长时间封禁之后有支持了v2ray，现在又在尝试支持trojan。</p></li></ul><h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ul><li>不稳定。因为用户群体数量大，所以成为了每次封禁首当其冲的对象。不知道新的trojan会不会好一点。</li></ul><h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><h4 id="1-购买账号"><a href="#1-购买账号" class="headerlink" title="1. 购买账号"></a>1. 购买账号</h4><p>购买链接：<a href="https://portal.shadowsocks.nl/cart.php" title="https://portal.shadowsocks.nl/cart.php">https://portal.shadowsocks.nl/cart.php</a></p><p>使用我的<a href="https://portal.shadowsocks.nl/aff.php?aff=28197" title="推荐链接">推荐链接</a>可以便宜一点，具体便宜多少我也不知道。</p><h4 id="2-安装客户端”-2-安装客户端"><a href="#2-安装客户端”-2-安装客户端" class="headerlink" title="2. 安装客户端”)2. 安装客户端"></a>2. 安装客户端”)2. 安装客户端</h4><p>Windows的客户端有两个：shadowscocks和v2ray。shadowsocks只支持SSR，不支持v2ray，v2ray都支持。</p><p>网上的一些教程说还要安装SwithyOmega的插件。个人觉得完全没有必要，而且这个插件也不好用。</p><h4 id="shadowscocks"><a href="#shadowscocks" class="headerlink" title="shadowscocks"></a>shadowscocks</h4><p>在GitHub上下载最新的(不是最新的可能不支持你的加密方式)客户端，<a href="https://github.com/shadowsocks/shadowsocks-windows/releases%E3%80%82%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85%E7%84%B6%E5%90%8E%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86%E3%80%82" title="https://github.com/shadowsocks/shadowsocks-windows/releases。双击安装然后登陆账号就可以了。">https://github.com/shadowsocks/shadowsocks-windows/releases。双击安装然后登陆账号就可以了。</a></p><h4 id="v2ray"><a href="#v2ray" class="headerlink" title="v2ray"></a>v2ray</h4><p>从github下载v2ray内核</p><p><a href="https://github.com/v2ray/v2ray-core/releases" title="https://github.com/v2ray/v2ray-core/releases">https://github.com/v2ray/v2ray-core/releases</a></p><p>再下载图形界面</p><p><a href="https://github.com/2dust/v2rayN/releases/" title="https://github.com/2dust/v2rayN/releases/">https://github.com/2dust/v2rayN/releases/</a></p><p>将图形界面文件解压移动到内核文件内运行v2rayN.exe即可。</p><p>最后祝大家都能够省心地科学上网。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境配置</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>VPN</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用ShapeIT2进行单倍型分型</title>
+    <link href="/2019/11/14/%E4%BD%BF%E7%94%A8ShapeIT2%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%80%8D%E5%9E%8B%E5%88%86%E5%9E%8B/"/>
+    <url>/2019/11/14/%E4%BD%BF%E7%94%A8ShapeIT2%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%80%8D%E5%9E%8B%E5%88%86%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<h2 id="ShapeIT2支持两种phasing的方法-for-unrelated-individuals-without-family-information"><a href="#ShapeIT2支持两种phasing的方法-for-unrelated-individuals-without-family-information" class="headerlink" title="ShapeIT2支持两种phasing的方法 (for unrelated individuals without family information)"></a>ShapeIT2支持两种phasing的方法 (for unrelated individuals without family information)</h2><ul><li><p>使用参考面板</p></li><li><p>不使用参考面板</p></li></ul><p>输入文件都是VCF文件。</p><h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ol><li><p>将VCF按照染色体分开</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">vcftools --gzvcf chinese-han.phase3.genotypes.vcf.gz \<br>         --chr 22 \<br>         --recode \<br>         --recode-INFO-all \<br>         --remove-filtered-all \<br>         --min-alleles 2 \<br>         --max-alleles 2 \<br>         --out chinese_chr22<br></code></pre></td></tr></table></figure></li><li><p>phasing</p><ol><li><p>不使用参考面板</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">shapeit --input-vcf gwas.vcf \<br>        -M genetic_map.txt \<br>        -O gwas.phased \<br>        -T 4<br></code></pre></td></tr></table></figure></li><li><p>使用参考面板</p><p>使用1000G作为参考面板。</p><ol><li><p>Check SNP between INPUT and REF PANEL</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">shapeit -check \<br>        --input-vcf test_chr22.recode.vcf \<br>        -M ~/one_thousand_genome/1000GP_Phase3/genetic_map_chr22_combined_b37.txt \<br>        --input-ref ~/one_thousand_genome/1000GP_Phase3/1000GP_Phase3_chr22.hap.gz \<br>        ~/one_thousand_genome/1000GP_Phase3/1000GP_Phase3_chr22.legend.gz \<br>        ~/one_thousand_genome/1000GP_Phase3/1000GP_Phase3.sample \<br>        --output-log test_chr22.alignments<br></code></pre></td></tr></table></figure></li><li><p>Phase wirh REF (exclude SNPs in .strand.exclude)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">shapeit --input-vcf test_chr22.recode.vcf \<br>        -M ~/one_thousand_genome/1000GP_Phase3/genetic_map_chr22_combined_b37.txt \<br>        --input-ref ~/one_thousand_genome/1000GP_Phase3/1000GP_Phase3_chr22.hap.gz \<br>        ~/one_thousand_genome/1000GP_Phase3/1000GP_Phase3_chr22.legend.gz \<br>        ~/one_thousand_genome/1000GP_Phase3/1000GP_Phase3.sample \<br>        -O test_chr22.phased.with.ref \<br>        --exclude-snp test_chr22.alignments.snp.strand.exclude \<br>        -T 4<br></code></pre></td></tr></table></figure></li></ol></li></ol></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>生信教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>GWAS</tag>
+      
+      <tag>Imputation</tag>
+      
+      <tag>Phasing</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>在Linux服务器间快速传输大型文件</title>
+    <link href="/2019/10/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%97%B4%E5%BF%AB%E9%80%9F%E4%BC%A0%E8%BE%93%E5%A4%A7%E5%9E%8B%E6%96%87%E4%BB%B6/"/>
+    <url>/2019/10/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%97%B4%E5%BF%AB%E9%80%9F%E4%BC%A0%E8%BE%93%E5%A4%A7%E5%9E%8B%E6%96%87%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Sometimes we need to back up data from a server to another using <code>scp</code> or <code>rsync</code>. It is very time-consuming when the data is very large, for example, over 500G. I found a combined command that helped me a lot.</p></blockquote><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol><li><p>将你的文件分成若干个小文件；</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">split</span> -b 1G large_file.txt.gz large_file/large_file.txt.gz.part-<br><br></code></pre></td></tr></table></figure><p><code>-b</code>指定文件大小</p></li><li><p>传输分裂后的文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp large_file/large_file.txt.gz.part-* user@xx.xx.xx:/path/of/destination<br><br></code></pre></td></tr></table></figure><p>也可以使用并行同时传输多个文件，虽然速度不会有提升，因为主要的限制来自宽带，但是分裂文件可以解决因为网络问题造成的传输中断</p></li><li><p>将传输过去的小文件合并。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> large_file.txt.gz.part-* &gt; large_file.txt.gz<br></code></pre></td></tr></table></figure><p>也可以用md5进行校验。</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>小技巧</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>文件传输</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>基因芯片中TOP/BOT Strand and A/B Allele的区别</title>
+    <link href="/2019/10/12/%E5%9F%BA%E5%9B%A0%E8%8A%AF%E7%89%87ABAllele%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <url>/2019/10/12/%E5%9F%BA%E5%9B%A0%E8%8A%AF%E7%89%87ABAllele%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    
+    <content type="html"><![CDATA[<h2 id="“TOP-x2F-BOT”-Strand-and-“A-x2F-B”-Allele"><a href="#“TOP-x2F-BOT”-Strand-and-“A-x2F-B”-Allele" class="headerlink" title="“TOP&#x2F;BOT” Strand and “A&#x2F;B” Allele"></a>“TOP&#x2F;BOT” Strand and “A&#x2F;B” Allele</h2><p>Rather than referencing the evolving public databases to provide accurate SNP strand and orientation, Illumina has developed a method to consistently designate SNPs based on the actual or contextual sequence of each individual SNP.The advantage of this method is that it will consistently designate the same SNP orientation and allele calls even if public SNP databases and genome assemblies change. This will enable researchers worldwide to easily correlate the genotype calls made today to research that may have been completed several years ago.&amp;#x20;</p><p><img src="https://i.loli.net/2020/04/14/7ANoghndUsFQljG.png"></p><p><a href="https://i.loli.net/2020/04/14/7ANoghndUsFQljG.png" title="image.png">image.png</a></p><ul><li><p>A in Candidate allele: TOP</p></li><li><p>T in Candidate allele: BOT</p></li></ul><h4 id="sequence-walking"><a href="#sequence-walking" class="headerlink" title="sequence walking"></a>sequence walking</h4><p>If the SNP is an A&#x2F;T] or a [C&#x2F;G], then the above rules do not apply. &amp;#x20;</p><p><img src="https://i.loli.net/2020/04/14/GXgkm7rOL3VhTPb.png"></p><ul><li><p>To designate Strand, when the A or T in the first unambiguous pair is on the 5’ side of the SNP, then the sequence is designated TOP. When the A or T in the first unambiguous pair is on the 3’ side of the SNP, then the sequence is designated BOT.</p></li><li><p>To designate Allele for an [A&#x2F;T] SNP, when the Strand is TOP then Allele A &#x3D; A and Allele B &#x3D; T. When the Strand is BOT, then Allele A &#x3D; T and Allele B &#x3D;A.</p></li><li><p>To designate Allele for a [C&#x2F;G] SNP, when the Strand is TOP then Allele A &#x3D; C and Allele B &#x3D; G. When the Strand is BOT then Allele A &#x3D; G and Allele B &#x3D; C.</p></li></ul><p><img src="https://i.loli.net/2020/04/14/Fz432xZifpHmCrt.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>知识点</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>GWAS</tag>
+      
+      <tag>基因分型</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Git快速入门</title>
+    <link href="/2019/09/11/Git%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
+    <url>/2019/09/11/Git%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</url>
+    
+    <content type="html"><![CDATA[<p>安装 Git</p><p>For Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install git<br></code></pre></td></tr></table></figure><p>安装完成后，还需要最后一步设置，在命令行输入：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git config --global user.name <span class="hljs-string">&quot;Your Name&quot;</span><br>$ git config --global user.email <span class="hljs-string">&quot;email@example.com&quot;</span><br><br></code></pre></td></tr></table></figure><p><code>–global</code>参数表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p><h2 id="创建版本库-本地"><a href="#创建版本库-本地" class="headerlink" title="创建版本库 (本地)"></a>创建版本库 (本地)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">mkdir</span> learngit<br>$ <span class="hljs-built_in">cd</span> learngit<br>$ git init<br></code></pre></td></tr></table></figure><p>当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。也不一定必须在空目录下创建Git仓库，选择一个已经有东西的目录也是可以的。</p><h2 id="添加文件到版本库"><a href="#添加文件到版本库" class="headerlink" title="添加文件到版本库"></a>添加文件到版本库</h2><p>第一步，创建文件，把文件放入你的git过的目录下：</p><p>文件内容示例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Git is a version control system.<br>Git is free software.<br></code></pre></td></tr></table></figure><p>第二步，用命令git add告诉Git，把文件添加到仓库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git add readme.txt<br><br></code></pre></td></tr></table></figure><p>第三步，用命令git commit告诉Git，把文件提交到仓库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;wrote a readme file&quot;</span><br><br></code></pre></td></tr></table></figure><p>git commit命令-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p><p>commit可以一次提交很多文件，所以你可以多次add不同的文件，比如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git add file1.txt<br>$ git add file2.txt file3.txt<br>$ git commit -m <span class="hljs-string">&quot;add 3 files.&quot;</span><br><br></code></pre></td></tr></table></figure><p>更改文件并提交更改</p><ol><li><p>修改文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Git is a distributed version control system.<br>Git is free software.<br></code></pre></td></tr></table></figure></li><li><p>运行git status命令看看结果：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git status<br><br></code></pre></td></tr></table></figure></li><li><p>提交修改并说明</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git add readme.txt<br>$ git commit -m <span class="hljs-string">&quot;add distributed&quot;</span><br><br></code></pre></td></tr></table></figure></li></ol><p>用git diff可以查看修改内容。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git diff readme.txt <br>diff --git a/readme.txt b/readme.txt<br>index 46d49bf..9247db6 100644<br>--- a/readme.txt<br>+++ b/readme.txt<br>@@ -1,2 +1,2 @@<br>-Git is a version control system.<br>+Git is a distributed version control system.<br> Git is free software.<br></code></pre></td></tr></table></figure><h2 id="远程库（GitHub）"><a href="#远程库（GitHub）" class="headerlink" title="远程库（GitHub）"></a>远程库（GitHub）</h2><p>现在的情景是，本地创建了一个Git仓库后，再在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。</p><h3 id="第1步：创建SSH-Key"><a href="#第1步：创建SSH-Key" class="headerlink" title="第1步：创建SSH Key"></a>第1步：创建SSH Key</h3><p>在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，创建SSH Key：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br><br></code></pre></td></tr></table></figure><p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。</p><p>如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p><h3 id="第2步：登陆GitHub"><a href="#第2步：登陆GitHub" class="headerlink" title="第2步：登陆GitHub"></a>第2步：登陆GitHub</h3><ol><li><p>登陆GitHub，打开“Account settings”，“SSH Keys”页面，然后点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容；</p></li><li><p>然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库；</p></li><li><p>在Repository name填入learngit，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库；</p></li><li><p>把一个已有的本地仓库与之关联</p><p>现在，我们根据GitHub的提示，在本地的git仓库下运行命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git remote add origin git@github.com:michaelliao/learngit.git<br>$ git push -u origin master<br></code></pre></td></tr></table></figure><p>从现在起，只要本地作了提交，就可以通过命令： &amp;#x20;</p></li><li><p>把本地仓库的内容推送到GitHub仓库；</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ git push origin master<br><br></code></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>命令行</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
