@@ -4,6 +4,58 @@
   
   
   <entry>
+    <title>自动刷新github hosts</title>
+    <link href="/2022/10/16/%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0github%20hosts/"/>
+    <url>/2022/10/16/%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0github%20hosts/</url>
+    
+    <content type="html"><![CDATA[<p>日常工作中经常会发现GitHub的访问会不稳定，有的时候可以有的时候又不可以。实际上GitHub是没有被墙的，只是受到DNS污染，就是无法找到GitHub正确的IP地址，因此我们可以通过修改hosts的方式告诉服务器GitHub的IP是多少。</p><p>切换到root</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">su root<br></code></pre></td></tr></table></figure><p>手动更新hosts</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&quot;/# GitHub520 Host Start/Q&quot;</span> /etc/hosts &amp;&amp; curl https://raw.hellogithub.com/hosts &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure><p>加入cron自动更新，每分钟更新一次</p><p>修改<code>/var/spool/cron/crontabs/root</code></p><p>添加：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">* * * * * sed -i <span class="hljs-string">&quot;/# GitHub520 Host Start/Q&quot;</span> /etc/hosts &amp;&amp; curl https://raw.hellogithub.com/hosts &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure><p>刷新</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ service cron reload<br> * Reloading configuration files <span class="hljs-keyword">for</span> periodic <span class="hljs-built_in">command</span> scheduler cron                                                                                                                                                                         [ OK ]<br>$ crontab -l<br>* * * * * sed -i <span class="hljs-string">&quot;/# GitHub520 Host Start/Q&quot;</span> /etc/hosts &amp;&amp; curl https://raw.hellogithub.com/hosts &gt;&gt; /etc/host<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境配置</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>tinyproxy代理配置</title>
+    <link href="/2022/10/03/tinyproxy%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/"/>
+    <url>/2022/10/03/tinyproxy%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<p>有时候处于内网的服务器不能直接访问外网，这对下载数据和conda以及github上的软件包带来了很大困扰。此时如果有一台内网服务器可以访问的服务器，而这台服务器又可以访问外网的话，我们就可以通过tinyproxy把这台服务器当作代理服务器，让内网服务器通过代理服务器间接访问外网。</p><p>ubuntu安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install tinyproxy<br></code></pre></td></tr></table></figure><p>配置：&#x2F;etc&#x2F;tinyproxy.conf</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text"># 如果/var/log/tinyproxy/tinyproxy.log权限报错，就把下面两行改成/var/log/tinyproxy的所有者<br>User tinyproxy<br>Group tinyproxy<br><br># 设置端口<br>Port 3216<br><br># 可以设置用户名和密码<br>BasicAuth user passwd<br><br># 可以设置连接的IP地址限制<br>Allow ip<br></code></pre></td></tr></table></figure><p>启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -d debug模式，取消-d进入后台运行</span><br>$ sudo tinyproxy -d -c /etc/tinyproxy.conf<br></code></pre></td></tr></table></figure><p>查看进程</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ps -ef|grep tinyproxy|grep -v grep<br>tinypro+  690507       1  0 20:24 ?        00:00:00 /usr/bin/tinyproxy<br>root      691964  690216  0 20:29 pts/6    00:00:00 sudo tinyproxy -d -c /etc/tinyproxy.conf<br>root      691965  691964  0 20:29 pts/7    00:00:00 sudo tinyproxy -d -c /etc/tinyproxy.conf<br>root      691966  691965  0 20:29 pts/7    00:00:02 tinyproxy -d -c /etc/tinyproxy.conf<br></code></pre></td></tr></table></figure><p>终止</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ sudo ps -ef|grep tinyproxy|grep -v grep|awk <span class="hljs-string">&#x27;&#123;print &quot;kill -9 &quot;$2&#125;&#x27;</span>|sudo sh<br></code></pre></td></tr></table></figure><p>配置代理</p><p>在.zshrc(bash 就是.bashrc)中加入：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs 纯文本">export http_proxy=&quot;http://ip:port&quot;<br>export https_proxy=&quot;http://ip:port&quot;<br><br># 有用户名密码验证的话<br>export http_proxy=&quot;http://user:passwd@ip:port&quot;<br>export https_proxy=&quot;http://user:passwd@ip:port&quot;<br><br></code></pre></td></tr></table></figure><p>conda不需要额外在.condarc中配置代理。</p><p>git代理配置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># git设置代理</span><br>git config --global http.proxy http://127.0.0.1:1080<br>git config --global https.proxy http://127.0.0.1:1080<br><br><span class="hljs-comment"># git取消代理</span><br>git config --global --<span class="hljs-built_in">unset</span> http.proxy<br>git config --global --<span class="hljs-built_in">unset</span> https.proxy<br></code></pre></td></tr></table></figure><p>github ssh协议要走ssh隧道，编辑<code>~/.ssh/config</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Host github.com<br>  HostName github.com<br>  ProxyCommand ssh hongxi@115.24.151.249 -W %h:%p<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境配置</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>proxy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基因ID转换的方法</title>
     <link href="/2020/06/04/%E5%9F%BA%E5%9B%A0ID%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <url>/2020/06/04/%E5%9F%BA%E5%9B%A0ID%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%96%B9%E6%B3%95/</url>
