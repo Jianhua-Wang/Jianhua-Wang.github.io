@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>chatgpt使用心得</title>
+    <link href="/2023/04/05/chatgpt%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
+    <url>/2023/04/05/chatgpt%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</url>
+    
+    <content type="html"><![CDATA[<h2 id="主要使用场景"><a href="#主要使用场景" class="headerlink" title="主要使用场景"></a>主要使用场景</h2><h3 id="文字处理工作"><a href="#文字处理工作" class="headerlink" title="文字处理工作"></a>文字处理工作</h3><ul><li><p>翻译</p><p>  <img src="/image/20230405/Untitled.png" alt="Untitled"></p></li><li><p>润色</p><p>  中文润色</p><p>  <img src="/image/20230405/Untitled%201.png" alt="Untitled"></p><p>  英文润色</p><p>  <img src="/image/20230405/Untitled%202.png" alt="Untitled"></p></li><li><p>扩写</p><p>  <img src="/image/20230405/Untitled%203.png" alt="Untitled"></p></li></ul><h3 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h3><ul><li><p>写代码</p><p>  在不使用第三方库时，回答准确度是比较高的。</p><p>  <img src="/image/20230405/Untitled%204.png" alt="Untitled"></p><p>  <img src="/image/20230405/Untitled%205.png" alt="Untitled"></p><p>  但是如果遇到需要使用第三方库的情况，在实际使用中，经常需要花很多时间来debug。</p></li><li><p>解释代码</p><p>  <img src="/image/20230405/Untitled%206.png" alt="Untitled"></p></li><li><p>lint code</p><p>  <img src="/image/20230405/Untitled%207.png" alt="Untitled"></p></li></ul><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><ul><li><p><strong>名词解释</strong></p><p>  <img src="/image/20230405/Untitled%208.png" alt="Untitled"></p><p>  举例说明帮助理解</p><p>  <img src="/image/20230405/Untitled%209.png" alt="Untitled"></p></li><li><p><strong>总结</strong></p><p>  <img src="/image/20230405/Untitled%2010.png" alt="Untitled"></p><p>  <img src="/image/20230405/Untitled%2011.png" alt="Untitled"></p></li><li><p><strong>技术问题</strong></p><p>  <img src="/image/20230405/Untitled%2012.png" alt="Untitled"></p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul><li>文字辅助工作强于所有的工具，解决开头难的问题；</li><li>简单问题一搜即达；</li><li>可以根据对话上下文做出回答；</li><li>语言功能很强大，能够接受启发式提问；</li></ul><h3 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h3><ul><li><strong>访问限制</strong>：需要梯子，最近还大量封号封IP；可以使用poe.com，bing AI，openAI API替代；</li><li><strong>响应速度慢</strong>：回答基本是一个字一个字的往外蹦；可以使用openAI API；</li><li><strong>搜索能力一般</strong>：数据不是最新的；经常会胡编乱造；搜索复杂问题用 bing AI 会好一点；</li></ul><h3 id="我目前的使用方式："><a href="#我目前的使用方式：" class="headerlink" title="我目前的使用方式："></a>我目前的使用方式：</h3><ul><li>不使用chatGPT，而使用openAI API（<a href="https://github.com/binary-husky/chatgpt_academic">学术优化</a>）和 bing AI，因为梯子被chatGPT封了；</li><li>简单文字处理用openAI API，虽然bing AI是基于GPT-4的，但是速度也很慢，但是我用的频率也很低，GPT写废话的能力超级强，但也仅限于写废话，写其他的会出错；</li><li>GPT可以帮助过滤掉一些没有用的信息，因此可以用来帮助我快速了解一个主题，但是仅限于了解；</li><li>编程辅助不用chatGPT，需要频繁复制粘贴，还要想怎么提问题机器人才好回答，效率实在太低；</li></ul><p>综上所述，我使用GPT的频率并不高，就算是文字处理问题我也不怎么用，因为来回复制粘贴太麻烦了，我正在等Microsoft 365集成GPT。而且以目前GPT的能力辅助专业工作还是太难了，或者说效率很低，高级检索不如Google，编程问题不如问stackover flow，个人认为GPT作为通用大语言模型，对普通用户或者日常生活需求的满足是令人佩服的，但是要提高专业领域工作效率还是需要面向专业知识学习的模型，比如github的copilot，adobe的firefly，金融领域的BloombergGPT，或许有天会推出一个面向生命科学领域的大模型，能帮助科研工作者设计实验，分析数据，解决问题。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>效率</tag>
+      
+      <tag>GPT</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用tabix快速查询rsID和染色体位置</title>
     <link href="/2023/03/28/%E4%BD%BF%E7%94%A8tabix%E5%BF%AB%E9%80%9F%E6%9F%A5%E8%AF%A2rsID%E5%92%8C%E6%9F%93%E8%89%B2%E4%BD%93%E4%BD%8D%E7%BD%AE/"/>
     <url>/2023/03/28/%E4%BD%BF%E7%94%A8tabix%E5%BF%AB%E9%80%9F%E6%9F%A5%E8%AF%A2rsID%E5%92%8C%E6%9F%93%E8%89%B2%E4%BD%93%E4%BD%8D%E7%BD%AE/</url>
