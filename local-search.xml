@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>系统配置</category>
+      <category>环境配置</category>
       
     </categories>
     
@@ -23,6 +23,35 @@
       <tag>linux</tag>
       
       <tag>tmux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用vscode进行远程开发</title>
+    <link href="/2023/04/10/%E4%BD%BF%E7%94%A8vscode%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/"/>
+    <url>/2023/04/10/%E4%BD%BF%E7%94%A8vscode%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/</url>
+    
+    <content type="html"><![CDATA[<h3 id="进行远程开发有以下几个好处："><a href="#进行远程开发有以下几个好处：" class="headerlink" title="进行远程开发有以下几个好处："></a>进行远程开发有以下几个好处：</h3><ol><li>节省本地计算机资源：使用远程主机上的计算资源和存储空间，可以减轻本地计算机的负担，使本地计算机更加流畅。</li><li>便于多人协作：多人可以连接到同一远程主机上进行开发和编写代码，方便协同工作、分享代码和资源。</li><li>提高开发效率：通过远程开发，可以直接在远程主机上进行开发和编写代码，不需要将代码传输到本地计算机再进行操作，从而提高开发效率。</li><li>方便移植和部署：使用远程开发可以方便移植和部署代码，可以在不同的计算机上进行开发和调试，并将代码和环境部署到服务器或云端供应用使用。</li><li>环境一致性：使用远程开发可以保证开发环境在不同计算机上的一致性，避免因为环境问题导致开发和调试时遇到的问题。</li></ol><h3 id="支持远程开发的IDE有几种："><a href="#支持远程开发的IDE有几种：" class="headerlink" title="支持远程开发的IDE有几种："></a>支持远程开发的IDE有几种：</h3><ol><li>VIM：图形界面比较简陋，而且学习成本比较高，不支持jupyter notebook；</li><li>jetbrain的pycharm，IDEA等都推出了server版，本质是在服务器上开启服务然后本地连接接口，体验几乎和在本地一样，但是延迟较高，暂时还不支持Jupyter notebook</li><li>jetbarin还推出了一个对标vscode的轻量化IDE，对远程开发支持很友好，还有智能模式，但是插件还比较少，不支持jupyter；</li><li>vscode在几年前就可以通过remote插件支持远程开发，后面微软又开发了jupyter插件来支持jupyter，切换环境的操作也比pycharm丝滑很多。</li></ol><p>由于jupyter对我来说是刚需，所以使用vscode来进行远程开发几乎是唯一的选择，好在是目前我对vscode的体验都很满意。</p><h3 id="下面简单介绍一下vscode如何配置远程开发："><a href="#下面简单介绍一下vscode如何配置远程开发：" class="headerlink" title="下面简单介绍一下vscode如何配置远程开发："></a>下面简单介绍一下vscode如何配置远程开发：</h3><ol><li><p>安装插件，建议下面这几个插件都安装</p><p> <img src="/image/20230410/Untitled.png" alt="Untitled"></p><p> 安装之后侧边栏就会增加一个按钮</p><p> <img src="/image/20230410/Untitled%201.png" alt="Untitled"></p></li><li><p>点击右上角的加号就可以使用ssh登陆到远程服务器，然后就可以进行远程开发了。</p></li></ol><h3 id="使用REMOTE-Tunnels"><a href="#使用REMOTE-Tunnels" class="headerlink" title="使用REMOTE Tunnels"></a>使用REMOTE Tunnels</h3><p>如果服务器在内网中，无法从公网直接连接时，需要使用ssh隧道或者frp等内网穿透手段来建立ssh连接。</p><p>也可以在服务器端开启vscode服务后，通过vscode.dev提供的隧道进行远程开发，这样做的好处是可以通过浏览器访问，也就是说哪怕使用iPad可以进行开发</p><p>具体步骤就是下载命令行版本的vscode，直接解压得到一个二进制的code文件，运行<code>code tunnel</code></p><p>根据指示进行GitHub账号验证，通过之后就会等到服务的链接，vscode上也会显示运行中的服务器。</p><p><img src="/image/20230410/Untitled%202.png" alt="Untitled"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境配置</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+      <tag>vscode</tag>
+      
+      <tag>远程开发</tag>
       
     </tags>
     
